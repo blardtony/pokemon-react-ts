@@ -9,7 +9,6 @@
     "paths": {
       "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
-      "@types/*": ["types/*"],
       "@schemas/*": ["schemas/*"]
     },
 
