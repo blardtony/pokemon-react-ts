@@ -1,15 +1,15 @@
 import { PokemonListSchema, PokemonSchema } from '@schemas/pokemon.schema';
 import { useQueries, useQuery } from 'react-query';
 
-const getPokemon = () => {
-  return fetch('https://pokeapi.co/api/v2/pokemon')
-    .then((res) => res.json())
-    .then((data) => PokemonListSchema.parse(data));
+const getPokemon = async () => {
+  const res = await fetch('https://pokeapi.co/api/v2/pokemon');
+  const data = await res.json();
+  return PokemonListSchema.parse(data);
 };
-const getPokemonByName = (name: string) => {
-  return fetch('https://pokeapi.co/api/v2/pokemon/' + name)
-    .then((res) => res.json())
-    .then((data) => PokemonSchema.parse(data));
+const getPokemonByName = async (name: string) => {
+  const res = await fetch('https://pokeapi.co/api/v2/pokemon/' + name);
+  const data = await res.json();
+  return PokemonSchema.parse(data);
 };
 
 const useGetPokemon = () => {
