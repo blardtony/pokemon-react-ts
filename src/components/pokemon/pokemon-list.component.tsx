@@ -2,6 +2,7 @@ import Loading from '@components/loading/loading.component.tsx';
 import Error from '@components/error/error.component.tsx';
 import { PokemonListSchema, PokemonSchema } from '@schemas/pokemon.schema.ts';
 import { useQueries, useQuery } from 'react-query';
+import PokemonItem from './pokemon-item.component';
 
 const PokemonsList = () => {
   const getPokemon = () => {
@@ -45,21 +46,12 @@ const PokemonsList = () => {
     <>
       <h1 className="text-3xl font-bold">Pokemon App</h1>
 
-      <ul>
+      <div className="flex flex-wrap gap-8">
         {results.map((result) => {
           const { data } = result;
-          return (
-            <li key={data?.name}>
-              <h2 className="text-2xl font-bold">{data?.name}</h2>
-              <img
-                src={data?.sprites.front_default}
-                alt={data?.name}
-                className="max-w-[200px]"
-              />
-            </li>
-          );
+          return <PokemonItem pokemon={data} key={data?.id} />;
         })}
-      </ul>
+      </div>
     </>
   );
 };
