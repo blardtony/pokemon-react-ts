@@ -19,7 +19,7 @@ export const NamedAPIResourceSchema = z.object({
 export const NamedAPIResourcesSchema = z.array(NamedAPIResourceSchema);
 
 export const PokemonStatSchema = z.object({
-  stat: NamedAPIResourcesSchema,
+  stat: NamedAPIResourceSchema,
   effort: z.number(),
   base_stat: z.number(),
 });
@@ -32,8 +32,10 @@ export const PokemonSpritesSchema = z.object({
 
 export const PokemonTypeSchema = z.object({
   slot: z.number(),
-  type: NamedAPIResourcesSchema,
+  type: NamedAPIResourceSchema,
 });
+
+const PokemonTypesSchema = z.array(PokemonTypeSchema);
 
 export const PokemonSchema = z.object({
   id: z.number(),
@@ -46,9 +48,9 @@ export const PokemonSchema = z.object({
   abilities: PokemonAbilitiesSchema,
   forms: NamedAPIResourcesSchema,
   sprites: PokemonSpritesSchema,
-  species: NamedAPIResourcesSchema,
+  species: NamedAPIResourceSchema,
   stats: PokemonStatsSchema,
-  types: PokemonTypeSchema,
+  types: PokemonTypesSchema,
 });
 
 export const PokemonsSchema = z.array(PokemonSchema);
@@ -60,3 +62,4 @@ export const PokemonListSchema = z.object({
 });
 
 export type PokemonList = z.infer<typeof PokemonListSchema>;
+export type PokemonsSchemaList = z.infer<typeof PokemonsSchema>;
