@@ -46,7 +46,7 @@ const PokemonsList = () => {
     <>
       <h1 className="text-3xl font-bold">Pokemon App</h1>
 
-      <div className="flex flex-wrap gap-8">
+      <div className="flex flex-wrap justify-center gap-10">
         {results.map((result) => {
           const { data } = result;
           return <PokemonItem pokemon={data} key={data?.id} />;
