@@ -1,0 +1,15 @@
+@keyframes loading {
+  0% {
+    transform: rotate(-45deg);
+  }
+  50% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(-45deg);
+  }
+}
+
+.pokeball {
+  animation: loading 3s infinite ease-in-out;
+}
