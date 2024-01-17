@@ -1,7 +1,7 @@
 import Loading from '@components/loading/loading.component.tsx';
 import Error from '@components/error/error.component.tsx';
-import PokemonItem from './pokemon-item.component';
-import useGetPokemon from 'hooks/use-get-pokemon.hook';
+import PokemonItem from './pokemon-item.component.tsx';
+import useGetPokemon from 'hooks/use-get-pokemon.hook.ts';
 
 const PokemonsList = () => {
   const { results, isError, isLoading } = useGetPokemon();
