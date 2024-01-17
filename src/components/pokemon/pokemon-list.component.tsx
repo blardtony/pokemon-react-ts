@@ -2,9 +2,12 @@ import Loading from '@components/loading/loading.component.tsx';
 import Error from '@components/error/error.component.tsx';
 import PokemonItem from './pokemon-item.component.tsx';
 import useGetPokemon from 'hooks/use-get-pokemon.hook.ts';
+import { useState } from 'react';
 
 const PokemonsList = () => {
-  const { results, isError, isLoading } = useGetPokemon();
+  const [page, setPage] = useState<number>(1);
+  const { results, isError, isLoading, isPreviousData, isNextData } =
+    useGetPokemon(page);
 
   if (isLoading) return <Loading />;
 
@@ -20,6 +23,20 @@ const PokemonsList = () => {
           return <PokemonItem pokemon={data} key={data?.id} />;
         })}
       </div>
+      <button
+        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+        onClick={() => isPreviousData && setPage(page - 1)}
+        disabled={!isPreviousData}
+      >
+        Previous page
+      </button>
+      <button
+        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed"
+        onClick={() => isNextData && setPage(page + 1)}
+        disabled={!isNextData}
+      >
+        Next page
+      </button>
     </>
   );
 };
