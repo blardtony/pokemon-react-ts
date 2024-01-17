@@ -1,10 +1,10 @@
-import Pokemons from '@components/Pokemons';
 import './App.css';
+import PokemonPage from '@pages/pokemon/pokemon-list.page';
 
 function App() {
   return (
     <>
-      <Pokemons />
+      <PokemonPage />
     </>
   );
 }
