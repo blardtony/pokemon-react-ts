@@ -1,8 +1,14 @@
 import { PokemonListSchema, PokemonSchema } from '@schemas/pokemon.schema';
 import { useQueries, useQuery } from 'react-query';
-
-const getPokemon = async () => {
-  const res = await fetch('https://pokeapi.co/api/v2/pokemon');
+const limit: number = 20;
+const offset = (page: number) => (page - 1) * limit;
+const getPokemon = async (page: number) => {
+  const res = await fetch(
+    'https://pokeapi.co/api/v2/pokemon?limit=' +
+      limit +
+      '&offset=' +
+      offset(page),
+  );
   const data = await res.json();
   return PokemonListSchema.parse(data);
 };
@@ -12,12 +18,15 @@ const getPokemonByName = async (name: string) => {
   return PokemonSchema.parse(data);
 };
 
-const useGetPokemon = () => {
-  const { data: pokemons } = useQuery({
-    queryKey: ['pokemons'],
-    queryFn: getPokemon,
-    select: (result) => result.results.map((pokemon) => pokemon.name),
+const useGetPokemon = (page: number) => {
+  const { data } = useQuery({
+    queryKey: ['pokemons', page],
+    queryFn: () => getPokemon(page),
+    keepPreviousData: true,
   });
+  const isPreviousData = data?.previous;
+  const isNextData = data?.next;
+  const pokemons = data?.results.map((pokemon) => pokemon.name);
 
   const results = useQueries(
     (pokemons || []).map((name) => {
@@ -30,7 +39,7 @@ const useGetPokemon = () => {
   );
   const isLoading = results.some((result) => result.isLoading);
   const isError = results.some((result) => result.isError);
-  return { results, isError, isLoading };
+  return { results, isError, isLoading, isPreviousData, isNextData };
 };
 
 export default useGetPokemon;
