@@ -63,3 +63,4 @@ export const PokemonListSchema = z.object({
 
 export type PokemonList = z.infer<typeof PokemonListSchema>;
 export type PokemonsSchemaList = z.infer<typeof PokemonsSchema>;
+export type PokemonType = z.infer<typeof PokemonSchema>;
