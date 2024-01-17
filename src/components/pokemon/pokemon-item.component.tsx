@@ -15,10 +15,6 @@ const PokemonItem = ({ pokemon }: { pokemon: PokemonType | undefined }) => {
         <h3 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 capitalize">
           {pokemon.name}
         </h3>
-        <p className="block font-sans text-base antialiased font-light leading-relaxed text-inherit">
-          The place is close to Barceloneta Beach and bus stop just 2 min by
-          walk and near
-        </p>
       </div>
       <div className="p-6 pt-0">
         <a
