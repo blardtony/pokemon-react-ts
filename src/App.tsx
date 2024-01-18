@@ -1,10 +1,14 @@
+import React from 'react';
 import './App.css';
-import PokemonPage from '@pages/pokemon/pokemon-list.page';
+import { RouterProvider } from 'react-router-dom';
+import router from '@components/router/router';
 
 function App() {
   return (
     <>
-      <PokemonPage />
+      <React.StrictMode>
+        <RouterProvider router={router} />
+      </React.StrictMode>
     </>
   );
 }
