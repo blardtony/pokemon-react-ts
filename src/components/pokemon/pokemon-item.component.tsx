@@ -1,7 +1,9 @@
 import { PokemonType } from '@schemas/pokemon.schema';
+import PokemonTypeComponent from './pokemon-type.component';
 
 const PokemonItem = ({ pokemon }: { pokemon: PokemonType | undefined }) => {
   if (!pokemon) return null;
+  console.log(pokemon.types);
   return (
     <div className="relative flex flex-col mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-72">
       <div className="relative h-32 mx-4 -mt-6 overflow-hidden text-white shadow-lg bg-clip-border rounded-xl bg-blue-gray-500 shadow-blue-gray-500/40">
@@ -15,6 +17,11 @@ const PokemonItem = ({ pokemon }: { pokemon: PokemonType | undefined }) => {
         <h3 className="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 capitalize">
           {pokemon.name}
         </h3>
+        <div className="flex gap-2 flex-wrap">
+          {pokemon.types.map((type) => (
+            <PokemonTypeComponent key={type.type.name} type={type.type.name} />
+          ))}
+        </div>
       </div>
       <div className="p-6 pt-0">
         <a
