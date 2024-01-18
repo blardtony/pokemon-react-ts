@@ -1,13 +1,14 @@
 import { PokemonListSchema, PokemonSchema } from '@schemas/pokemon.schema';
 import { useQueries, useQuery } from 'react-query';
-const limit: number = 20;
-const offset = (page: number) => (page - 1) * limit;
-const getPokemon = async (page: number) => {
+
+const offset = (page: number, limit: number) => (page - 1) * limit;
+
+const getPokemon = async (page: number, limit: number) => {
   const res = await fetch(
     'https://pokeapi.co/api/v2/pokemon?limit=' +
       limit +
       '&offset=' +
-      offset(page),
+      offset(page, limit),
   );
   const data = await res.json();
   return PokemonListSchema.parse(data);
@@ -18,10 +19,10 @@ const getPokemonByName = async (name: string) => {
   return PokemonSchema.parse(data);
 };
 
-const useGetPokemon = (page: number) => {
+const useGetPokemon = (page: number, limit: number) => {
   const { data } = useQuery({
     queryKey: ['pokemons', page],
-    queryFn: () => getPokemon(page),
+    queryFn: () => getPokemon(page, limit),
     keepPreviousData: true,
   });
   const isPreviousData = data?.previous;
