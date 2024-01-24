@@ -1,8 +1,8 @@
 import Loading from '@components/loading/loading.component.tsx';
 import Error from '@components/error/error.component.tsx';
 import PokemonItem from './pokemon-item.component.tsx';
-import useGetPokemon from 'hooks/use-get-pokemon.hook.ts';
-import usePagination from 'hooks/use-pagination.ts';
+import useGetPokemon from '@hooks/use-get-pokemon.hook.ts';
+import usePagination from '@hooks/use-pagination.ts';
 
 const PokemonsList = () => {
   const { page, limit, next, previous } = usePagination();
